@@ -225,9 +225,117 @@
     overflow: hidden;
   }
 
-  .contact-form-wrap iframe {
+  .contact-form {
+    padding: 36px 40px;
+  }
+
+  .form-group {
+    margin-bottom: 22px;
+  }
+
+  .form-label {
     display: block;
-    width: 100%; border: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--slate-mid);
+    margin-bottom: 8px;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    padding: 11px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    color: var(--slate);
+    background: var(--off-white);
+    border: 1px solid rgba(0,80,144,0.15);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0,80,144,0.08);
+  }
+
+  .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a6070' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 13px 28px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: white;
+    background: var(--primary);
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .form-submit:hover { background: var(--primary-dk); }
+  .form-submit:active { transform: scale(0.97); }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .form-success {
+    display: none;
+    padding: 48px 40px;
+    text-align: center;
+  }
+
+  .form-success-icon {
+    width: 48px; height: 48px;
+    background: var(--ice);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+  }
+
+  .form-success-icon svg { stroke: var(--primary); }
+
+  .form-success-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--slate);
+    margin-bottom: 10px;
+  }
+
+  .form-success-text {
+    font-size: 0.88rem;
+    color: var(--slate-mid);
+    line-height: 1.7;
   }
 
   /* ─── SUBSCRIBE CTA ─── */
@@ -299,7 +407,7 @@
     color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s;
   }
   .footer-links a:hover { color: white; }
-  .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.35); letter-spacing: 0.05em; }
+  .footer-copy { font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
 
   /* ─── ANIMATIONS ─── */
   @keyframes fadeUp {
@@ -372,16 +480,43 @@
       </div>
     </div>
     <div class="contact-form-wrap">
-      <iframe
-        src="REPLACE_WITH_GOOGLE_FORM_EMBED_URL"
-        width="100%"
-        height="600"
-        frameborder="0"
-        marginheight="0"
-        marginwidth="0"
-        title="Contact The Product Signal">
-        Loading form…
-      </iframe>
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/xvzyybwq" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="name">Your name</label>
+            <input class="form-input" type="text" id="name" name="name" required placeholder="Brad Traversy">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email address</label>
+            <input class="form-input" type="email" id="email" name="email" required placeholder="you@example.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="subject">What's this about?</label>
+          <select class="form-select" id="subject" name="subject" required>
+            <option value="" disabled selected>Pick one…</option>
+            <option value="Guest suggestion">Guest suggestion</option>
+            <option value="Topic idea">Topic idea</option>
+            <option value="Feedback on an episode">Feedback on an episode</option>
+            <option value="Just saying hello">Just saying hello</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">Your message</label>
+          <textarea class="form-textarea" id="message" name="message" required placeholder="Tell us what's on your mind…"></textarea>
+        </div>
+        <button class="form-submit" type="submit">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send message
+        </button>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="form-success-title">Message sent.</div>
+        <p class="form-success-text">Thanks for reaching out — we read everything<br>and will be in touch soon.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -444,7 +579,7 @@
     </div>
     <div class="footer-logo-text">
       The Product Signal
-      <span>© 2025 · All rights reserved</span>
+      <span>© 2026 · All rights reserved</span>
     </div>
   </div>
   <div class="footer-links">
@@ -452,9 +587,8 @@
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
     <a href="#subscribe">Subscribe</a>
-    <a href="https://www.youtube.com/@theproductsignal" target="_blank">YouTube ↗</a>
   </div>
-  <div class="footer-copy">Made with ♥ for product people</div>
+  <div class="footer-copy">Pittsburgh-made. For product people.</div>
 </footer>
 
 <script>
@@ -474,6 +608,28 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Formspree AJAX submission
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('.form-submit');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      const data = new FormData(form);
+      const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+      if (res.ok) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send message';
+        alert('Something went wrong — please try again or email us directly.');
+      }
+    });
+  }
 </script>
 </body>
 </html>
