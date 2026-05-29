@@ -30,21 +30,8 @@
     background: var(--off-white);
     color: var(--slate);
     overflow-x: hidden;
-    cursor: none;
   }
 
-  .cursor {
-    position: fixed;
-    width: 10px; height: 10px;
-    background: var(--primary);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s ease, height 0.2s ease, opacity 0.2s;
-    mix-blend-mode: multiply;
-  }
-  .cursor.hover { width: 36px; height: 36px; opacity: 0.4; }
 
   body::after {
     content: '';
@@ -619,7 +606,6 @@
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
 
 <!-- NAV -->
 <nav>
@@ -931,16 +917,7 @@
 </footer>
 
 <script>
-  const cursor = document.getElementById('cursor');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top  = e.clientY + 'px';
-  });
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-  });
-  const observer = new IntersectionObserver(entries => {
+const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
