@@ -327,7 +327,7 @@
 
   /* ─── STATS ─── */
   .stats-band {
-    display: grid; grid-template-columns: repeat(4, 1fr);
+    display: none; grid-template-columns: repeat(4, 1fr);
     border-top: 1px solid rgba(0,80,144,0.12);
     border-bottom: 1px solid rgba(0,80,144,0.12);
     background: white;
@@ -628,50 +628,49 @@
   .stat-mini .stat-label { color: rgba(255,255,255,0.5); }
 
   /* ─── SUBSCRIBE ─── */
-  .subscribe-section {
+  .subscribe-cta {
     background: var(--slate);
     padding: 80px 56px;
-    display: grid; grid-template-columns: 1fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 60px; align-items: center;
   }
 
-  .subscribe-title {
+  .subscribe-cta-title {
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
     font-weight: 900; line-height: 1.05;
     letter-spacing: -0.04em; color: white;
     margin-bottom: 16px;
   }
+  .subscribe-cta-title span { color: var(--accent); }
 
-  .subscribe-title span { color: var(--accent); }
-
-  .subscribe-desc {
-    font-size: 0.88rem; line-height: 1.7;
+  .subscribe-cta-text {
+    font-size: 0.9rem; line-height: 1.75;
     color: rgba(255,255,255,0.55);
   }
 
-  .subscribe-platforms {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 12px;
+  .subscribe-buttons {
+    display: flex; flex-direction: column; gap: 12px;
   }
 
-  .platform-btn {
-    display: flex; align-items: center; gap: 12px;
-    padding: 14px 18px;
+  .sub-btn {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 22px;
     background: rgba(255,255,255,0.07);
-    color: white; text-decoration: none;
-    font-size: 0.8rem; font-weight: 600;
     border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 10px;
+    border-radius: 12px; color: white;
+    text-decoration: none; font-size: 0.85rem; font-weight: 600;
     transition: background 0.2s, border-color 0.2s, transform 0.15s;
   }
-
-  .platform-btn:hover {
-    background: var(--primary); border-color: var(--primary);
-    transform: translateY(-2px);
-  }
-
-  .platform-icon { width: 20px; height: 20px; flex-shrink: 0; }
+  .sub-btn:hover { background: var(--primary); border-color: var(--primary); transform: translateX(4px); }
+  .sub-btn-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .sub-btn-icon svg { width: 18px; height: 18px; fill: white; }
+  .sub-btn-info { flex: 1; }
+  .sub-btn-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.5; margin-bottom: 2px; }
+  .sub-btn-name { font-size: 0.92rem; font-weight: 700; }
+  .sub-btn-arrow { font-size: 1rem; opacity: 0.4; transition: opacity 0.2s, transform 0.2s; }
+  .sub-btn:hover .sub-btn-arrow { opacity: 1; transform: translateX(3px); }
 
   /* ─── FOOTER ─── */
   footer {
@@ -744,10 +743,9 @@
     .stats-band { grid-template-columns: 1fr 1fr; }
     .featured-episode { grid-template-columns: 1fr; }
     .episodes-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-    .section { padding: 60px 28px; }
-    .about-section { grid-template-columns: 1fr; gap: 40px; padding: 60px 28px; }
-    .subscribe-section { grid-template-columns: 1fr; padding: 60px 28px; }
-    .subscribe-platforms { grid-template-columns: 1fr; }
+    .section { padding: 64px 28px; }
+    .about-section { grid-template-columns: 1fr; gap: 40px; padding: 64px 28px; }
+    .subscribe-cta { grid-template-columns: 1fr; padding: 64px 28px; }
     footer { flex-direction: column; gap: 20px; padding: 32px 28px; text-align: center; }
     .footer-links { justify-content: center; }
   }
@@ -775,6 +773,7 @@
     </div>
   </a>
   <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
     <li><a href="#episodes">Episodes</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="#subscribe">Subscribe</a></li>
@@ -816,7 +815,7 @@
       </div>
       <div class="hero-tagline">
         Cut through the noise.
-        <small>New episodes every week</small>
+        <small>New episodes every two weeks</small>
       </div>
     </div>
     <div class="hero-ticker">
@@ -1004,8 +1003,8 @@
         <div class="stat-label">Seasons</div>
       </div>
       <div class="stat-mini">
-        <div class="stat-num" style="font-size:1.4rem; font-family:'Outfit',sans-serif; font-weight:800;">CMU</div>
-        <div class="stat-label">MSPM</div>
+        <div class="stat-num" style="font-size:0.95rem; font-family:'Outfit',sans-serif; font-weight:800; letter-spacing:-0.02em;">Bi-weekly</div>
+        <div class="stat-label">Cadence</div>
       </div>
       <div class="stat-mini">
         <div class="stat-num" style="font-size:1.4rem; font-family:'Outfit',sans-serif; font-weight:800;">Free</div>
@@ -1016,27 +1015,51 @@
 </section>
 
 <!-- SUBSCRIBE -->
-<section class="subscribe-section" id="subscribe">
+<section class="subscribe-cta" id="subscribe">
   <div class="reveal">
-    <h2 class="subscribe-title">Never miss a <span>signal.</span></h2>
-    <p class="subscribe-desc">Subscribe wherever you listen — or watch every episode on YouTube. New conversations drop every week, no filler, no fluff.</p>
+    <h2 class="subscribe-cta-title">Never miss a <span>signal.</span></h2>
+    <p class="subscribe-cta-text">Subscribe wherever you listen — or watch every episode on YouTube. New conversations drop every two weeks, no filler, no fluff.</p>
   </div>
-  <div class="subscribe-platforms reveal" style="transition-delay:0.15s">
-    <a href="https://www.youtube.com/@theproductsignal" target="_blank" class="platform-btn">
-      <svg class="platform-icon" viewBox="0 0 24 24" fill="white"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.54 3.5 12 3.5 12 3.5s-7.54 0-9.38.55A3.02 3.02 0 0 0 .5 6.19C0 8.04 0 12 0 12s0 3.96.5 5.81a3.02 3.02 0 0 0 2.12 2.14C4.46 20.5 12 20.5 12 20.5s7.54 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14C24 15.96 24 12 24 12s0-3.96-.5-5.81zM9.75 15.27V8.73L15.82 12l-6.07 3.27z"/></svg>
-      YouTube
+  <div class="subscribe-buttons reveal" style="transition-delay:0.15s">
+    <a href="https://www.youtube.com/@theproductsignal" target="_blank" class="sub-btn">
+      <div class="sub-btn-icon" style="background:#FF0000">
+        <svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.54 3.5 12 3.5 12 3.5s-7.54 0-9.38.55A3.02 3.02 0 0 0 .5 6.19C0 8.04 0 12 0 12s0 3.96.5 5.81a3.02 3.02 0 0 0 2.12 2.14C4.46 20.5 12 20.5 12 20.5s7.54 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14C24 15.96 24 12 24 12s0-3.96-.5-5.81zM9.75 15.27V8.73L15.82 12l-6.07 3.27z"/></svg>
+      </div>
+      <div class="sub-btn-info">
+        <div class="sub-btn-label">Watch on</div>
+        <div class="sub-btn-name">YouTube</div>
+      </div>
+      <div class="sub-btn-arrow">→</div>
     </a>
-    <a href="#" class="platform-btn">
-      <svg class="platform-icon" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-      Spotify
+    <a href="#" class="sub-btn">
+      <div class="sub-btn-icon" style="background:#1DB954">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      </div>
+      <div class="sub-btn-info">
+        <div class="sub-btn-label">Listen on</div>
+        <div class="sub-btn-name">Spotify</div>
+      </div>
+      <div class="sub-btn-arrow">→</div>
     </a>
-    <a href="#" class="platform-btn">
-      <svg class="platform-icon" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.15-2.18 1.27-2.16 3.8.03 3.02 2.65 4.03 2.68 4.04l-.07.18zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      Apple Podcasts
+    <a href="#" class="sub-btn">
+      <div class="sub-btn-icon" style="background:#872ec4">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.15-2.18 1.27-2.16 3.8.03 3.02 2.65 4.03 2.68 4.04l-.07.18zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      </div>
+      <div class="sub-btn-info">
+        <div class="sub-btn-label">Listen on</div>
+        <div class="sub-btn-name">Apple Podcasts</div>
+      </div>
+      <div class="sub-btn-arrow">→</div>
     </a>
-    <a href="#" class="platform-btn">
-      <svg class="platform-icon" viewBox="0 0 24 24" fill="white"><path d="M12 0a12 12 0 1 0 0 24A12 12 0 0 0 12 0zm0 4.8a7.2 7.2 0 1 1 0 14.4A7.2 7.2 0 0 1 12 4.8zm0 2.4a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 2.4a2.4 2.4 0 1 1 0 4.8 2.4 2.4 0 0 1 0-4.8z"/></svg>
-      Pocket Casts
+    <a href="#" class="sub-btn">
+      <div class="sub-btn-icon" style="background:#F43E37">
+        <svg viewBox="0 0 24 24"><path d="M12 0a12 12 0 1 0 0 24A12 12 0 0 0 12 0zm0 4.8a7.2 7.2 0 1 1 0 14.4A7.2 7.2 0 0 1 12 4.8zm0 2.4a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 2.4a2.4 2.4 0 1 1 0 4.8 2.4 2.4 0 0 1 0-4.8z"/></svg>
+      </div>
+      <div class="sub-btn-info">
+        <div class="sub-btn-label">Listen on</div>
+        <div class="sub-btn-name">Pocket Casts</div>
+      </div>
+      <div class="sub-btn-arrow">→</div>
     </a>
   </div>
 </section>
@@ -1053,8 +1076,9 @@
     </div>
   </div>
   <div class="footer-links">
+    <a href="index.html">Home</a>
     <a href="#episodes">Episodes</a>
-    <a href="#about">About</a>
+    <a href="about.html">About</a>
     <a href="#subscribe">Subscribe</a>
     <a href="https://www.youtube.com/@theproductsignal" target="_blank">YouTube ↗</a>
   </div>
