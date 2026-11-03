@@ -270,3 +270,5 @@ section[id]{scroll-margin-top:100px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
 *,*::before,*::after{animation:none!important;transition:none!important}
 }
+
+.series-tagline{font-family:var(--heading);font-size:clamp(1.25rem,2.2vw,1.8rem);line-height:1.35;font-weight:600;letter-spacing:-.025em;color:var(--blue);margin-top:22px}
